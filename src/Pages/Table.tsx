@@ -1,10 +1,11 @@
-import React from "react";
 import MuiTable from "../components/Tables/MuiTable";
+
+import { columns } from "../utils/tableData";
 
 const Table = () => {
   return (
     <>
-      <MuiTable />
+      <MuiTable columnNamesArray={columns} stickyHeader={true} />
     </>
   );
 };

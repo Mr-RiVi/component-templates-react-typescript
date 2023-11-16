@@ -85,15 +85,15 @@ const NavItem: FunctionComponent<{ item: NavItem }> = ({ item }) => {
  *
  * @param {NavBarProps} items - The array of navigation items to be displayed.
  */
-const NavBar: FunctionComponent<NavBarProps> = ({ items }: NavBarProps) => (
-  <Drawer variant="permanent" anchor="left">
-    <ul>
-      {/* Map through the array of items and render a NavItem component for each */}
-      {items.map((item, index) => (
-        <NavItem key={index} item={item} />
-      ))}
-    </ul>
-  </Drawer>
-);
-
-export default NavBar;
+export default function NavBar({ items }: NavBarProps) {
+  return (
+    <Drawer variant="permanent" anchor="left">
+      <ul>
+        {/* Map through the array of items and render a NavItem component for each */}
+        {items.map((item, index) => (
+          <NavItem key={index} item={item} />
+        ))}
+      </ul>
+    </Drawer>
+  );
+}
