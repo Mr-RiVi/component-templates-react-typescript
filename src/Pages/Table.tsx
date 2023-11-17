@@ -5,7 +5,11 @@ import { columns } from "../utils/tableData";
 const Table = () => {
   return (
     <>
-      <MuiTable columnNamesArray={columns} stickyHeader={true} />
+      <MuiTable
+        columnNamesArray={columns}
+        columnAttributeArray={}
+        stickyHeader={true}
+      />
     </>
   );
 };
