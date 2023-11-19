@@ -1,17 +1,9 @@
+// First prop that we want to pass and its type
 type ColumnName = {
-  id: "name" | "code" | "population" | "size" | "density";
+  id: string;
   label: string;
   minWidth?: number;
   align?: "right" | "left" | "center";
-  format?: (value: number) => string;
-};
-
-type tableData = {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
 };
 
 export const columns: ColumnName[] = [
@@ -21,16 +13,37 @@ export const columns: ColumnName[] = [
     id: "population",
     label: "Population",
     minWidth: 170,
-    align: "right",
+    align: "left",
   },
   {
     id: "size",
     label: "Size",
     minWidth: 170,
-    align: "right",
+    align: "left",
+  },
+  {
+    id: "density",
+    label: "Density",
+    minWidth: 50,
+    align: "left",
   },
 ];
 
+// Second prop that we want to pass and its type
+type ColumnTypeMapping = {
+  [key: string]: string;
+  type: "string" | "number" | "button";
+};
+
+export const columnTypeMapping: ColumnTypeMapping[] = [
+  { attributeName: "name", type: "string" },
+  { attributeName: "code", type: "string" },
+  { attributeName: "population", type: "number" },
+  { attributeName: "size", type: "button" },
+  { attributeName: "density", type: "button" },
+];
+
+// Third prop that we want
 export const tableData = [
   {
     name: "India",
