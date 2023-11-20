@@ -24,14 +24,14 @@
 
 import MuiTable from "../components/Tables/MuiTable";
 
-import { columns, columnTypeMapping, tableData } from "../utils/tableData";
+import { columns, columnAttributeMapping, tableData } from "../utils/tableData";
 
 const Table = () => {
   return (
     <>
       <MuiTable
         columnNamesArray={columns}
-        columnTypeMappingArray={columnTypeMapping}
+        columnAttributeMapping={columnAttributeMapping}
         tableData={tableData}
         stickyHeader={true}
       />

@@ -42,9 +42,13 @@ type ColumnName = {
 };
 
 // Defines the expected structure of 'columnTypeMappingArray'.
-type ColumnTypeMapping = {
-  [key: string]: string;
-  type: "string" | "number" | "button";
+type ColumnAttributeMapping = {
+  [key: string]:
+    | {
+        type?: "button" | undefined;
+        buttonKind?: "text" | "content" | "mixed";
+      }
+    | undefined;
 };
 
 /**
@@ -58,7 +62,7 @@ type StringMap = {
 // Defines the expected shape(structure) of the props that the 'DefaultTable' React component should receive.
 type TableDataProps = {
   columnNamesArray: readonly ColumnName[];
-  columnTypeMappingArray: readonly ColumnTypeMapping[];
+  columnAttributeMapping: ColumnAttributeMapping;
   tableData: StringMap | undefined;
   stickyHeader: boolean;
 };
@@ -84,10 +88,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
    * @param type - The type of the content (e.g., "string", "number", "button").
    * @returns The rendered content based on its type.
    */
-  const renderCellContent = (
-    content: any,
-    type: "string" | "number" | "button"
-  ) => {
+  const renderCellContent = (content: any, type: "button" | undefined) => {
     if (type === "button") {
       return <Button>{content}</Button>;
     }
@@ -132,12 +133,13 @@ export default function DefaultTable(tableProps: TableDataProps) {
                 .map((row: StringMap) => {
                   return (
                     <TableRow hover>
-                      {tableProps.columnTypeMappingArray.map(
-                        (attribute: ColumnTypeMapping, index: number) => (
+                      {Object.keys(tableProps.columnAttributeMapping).map(
+                        (attributeName, index: number) => (
                           <TableCell key={index}>
                             {renderCellContent(
-                              row[attribute.attributeName],
-                              attribute.type
+                              row[attributeName],
+                              tableProps.columnAttributeMapping[attributeName]
+                                ?.type
                             )}
                           </TableCell>
                         )
