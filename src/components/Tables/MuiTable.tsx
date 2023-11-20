@@ -65,7 +65,7 @@ type TableDataProps = {
 
 export default function DefaultTable(tableProps: TableDataProps) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -89,21 +89,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
     type: "string" | "number" | "button"
   ) => {
     if (type === "button") {
-      return (
-        <Button
-          sx={{
-            backgroundColor: "#4CAF50",
-            color: "white",
-            padding: "5px 10px",
-            width: "77px",
-            borderRadius: "5px",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          {content}
-        </Button>
-      );
+      return <Button>{content}</Button>;
     }
     return content;
   };
