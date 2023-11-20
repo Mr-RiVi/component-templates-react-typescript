@@ -30,18 +30,22 @@ export const columns: ColumnName[] = [
 ];
 
 // Second prop that we want to pass and its type
-type ColumnTypeMapping = {
-  [key: string]: string;
-  type: "string" | "number" | "button";
+type ColumnAttributeMapping = {
+  [key: string]:
+    | {
+        type?: "button" | undefined;
+        buttonKind?: "text" | "content" | "mixed";
+      }
+    | undefined;
 };
 
-export const columnTypeMapping: ColumnTypeMapping[] = [
-  { attributeName: "name", type: "string" },
-  { attributeName: "code", type: "string" },
-  { attributeName: "population", type: "number" },
-  { attributeName: "size", type: "button" },
-  { attributeName: "density", type: "button" },
-];
+export const columnAttributeMapping: ColumnAttributeMapping = {
+  name: {},
+  code: {},
+  population: {},
+  size: { type: "button", buttonKind: "mixed" },
+  density: { type: "button", buttonKind: "text" },
+};
 
 // Third prop that we want
 export const tableData = [
