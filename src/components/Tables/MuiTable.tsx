@@ -82,14 +82,19 @@ export default function DefaultTable(tableProps: TableDataProps) {
     setPage(0);
   };
 
+  type ContentOptions = {
+    type?: any | "button";
+    buttonKind?: "text" | "content" | "mixed";
+  };
+
   /**
    * Renders the content of a table cell based on its type.
    * @param content - The content of the cell.
    * @param type - The type of the content (e.g., "string", "number", "button").
    * @returns The rendered content based on its type.
    */
-  const renderCellContent = (content: any, type: "button" | undefined) => {
-    if (type === "button") {
+  const renderCellContent = (content: any, contentOptions: ContentOptions) => {
+    if (contentOptions.type === "button") {
       return <Button>{content}</Button>;
     }
     return content;
@@ -139,7 +144,6 @@ export default function DefaultTable(tableProps: TableDataProps) {
                             {renderCellContent(
                               row[attributeName],
                               tableProps.columnAttributeMapping[attributeName]
-                                ?.type
                             )}
                           </TableCell>
                         )
