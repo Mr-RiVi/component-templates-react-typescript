@@ -35,6 +35,7 @@ type ColumnAttributeMapping = {
     | {
         type?: "button" | undefined;
         buttonKind?: "text" | "content" | "mixed";
+        text?: string;
       }
     | undefined;
 };
@@ -43,8 +44,8 @@ export const columnAttributeMapping: ColumnAttributeMapping = {
   name: {},
   code: {},
   population: {},
-  size: { type: "button", buttonKind: "mixed" },
-  density: { type: "button", buttonKind: "text" },
+  size: { type: "button", buttonKind: "mixed", text: "Kg" },
+  density: { type: "button", buttonKind: "text", text: "Edit" },
 };
 
 // Third prop that we want

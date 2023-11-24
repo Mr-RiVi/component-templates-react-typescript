@@ -11,12 +11,17 @@
  *   - label: string - The label or header text for the column.
  *   - minWidth?: number - (Optional) The minimum width of the column.
  *   - align?: 'right' | 'left' | 'center' - (Optional) The alignment of the column content.
- @param {Array} props.columnTypeMappingArray - An array of objects mapping column names to their types.
+ * @param {Object} props.columnAttributeMapping - An object mapping column names to their types and optional rendering options.
  *   Each object should have the following properties:
- *   - attributeName: string - The attribute name(key) of the data value.
+ *   - attributeName: string - The attribute name (key) of the data value.
  *   - type: 'string' | 'number' | 'button' - The type of content that should be rendered in the column.
  *     Valid types are 'string' for regular string content, 'number' for numeric content,
  *     and 'button' for content that should be rendered inside a button component.
+ *   - buttonKind?: 'text' | 'content' | 'mixed' - (Optional) The kind of button content if type is 'button'.
+ *     - 'text': Renders a button with the specified text.
+ *     - 'content': Renders a button with the raw content.
+ *     - 'mixed': Renders a button with a combination of content and text.
+ *   - text?: string - (Optional) The text to be displayed in the button when buttonKind is 'text' or 'mixed'.
  * @param {Array} props.tableData - An array of objects representing the data to be displayed in the table.
  * @param {boolean} props.stickyHeader - Determines whether the table header should stick to the top when scrolling.
  * @returns {React.ReactElement} The rendered MuiTable component.
@@ -83,21 +88,62 @@ export default function DefaultTable(tableProps: TableDataProps) {
   };
 
   type ContentOptions = {
-    type?: any | "button";
+    type?: "button";
     buttonKind?: "text" | "content" | "mixed";
+    text?: string;
   };
 
   /**
-   * Renders the content of a table cell based on its type.
+   * Renders the content of a table cell based on its type and options.
    * @param content - The content of the cell.
-   * @param type - The type of the content (e.g., "string", "number", "button").
-   * @returns The rendered content based on its type.
+   * @param contentOptions - Additional options for rendering content (e.g., type-specific options for buttons).
+   * @returns The rendered content based on its type and options.
    */
-  const renderCellContent = (content: any, contentOptions: ContentOptions) => {
-    if (contentOptions.type === "button") {
-      return <Button>{content}</Button>;
+  const renderCellContent = (
+    content: any,
+    contentOptions: ContentOptions | undefined
+  ) => {
+    // Check if the content type is not a button
+    if (contentOptions?.type !== "button") {
+      return content;
     }
-    return content;
+
+    // Destructure button options
+    const { buttonKind, text } = contentOptions;
+
+    // Ensure buttonKind is provided
+    if (!buttonKind) {
+      throw new Error("buttonKind is required when type is 'button'.");
+    }
+
+    // Handle different buttonKind cases
+    switch (buttonKind) {
+      case "text":
+        if (!text) {
+          throw new Error("Text is required when buttonKind is 'text'.");
+        }
+        // Render button with text
+        return <Button>{text}</Button>;
+
+      case "mixed":
+        if (!text) {
+          throw new Error("Text is required when buttonKind is 'mixed'.");
+        }
+        // Render button with content and text
+        return (
+          <Button>
+            {content} {text}
+          </Button>
+        );
+
+      case "content":
+        // Render button with content
+        return <Button>{content}</Button>;
+
+      default:
+        // Handle unsupported buttonKind
+        throw new Error(`Unsupported buttonKind: ${buttonKind}`);
+    }
   };
 
   return (
