@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../Pages/Home";
 import SideNavBar from "../Pages/SideNavBar";
 import Table from "../Pages/Table";
+import DropdownMenu from "../Pages/DropdownMenu";
+import Buttons from "../Pages/Buttons";
 
 const IndexRoutes: React.FC = () => {
   return (
@@ -11,6 +13,8 @@ const IndexRoutes: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/side-nav-bars" element={<SideNavBar />} />
       <Route path="/tables" element={<Table />} />
+      <Route path="/dropdowns" element={<DropdownMenu />} />
+      <Route path="/buttons" element={<Buttons />} />
     </Routes>
   );
 };
