@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import {
   Dialog,
   DialogTitle,
@@ -10,36 +8,33 @@ import {
 } from "@mui/material";
 
 /**
- * A reusable functional component that represents a Material-UI
- * select/dropdown menu.
+ * A reusable functional component that represents a Material-UI dialog/modal.
  * @param {Object} props - The props passed to the component.
- * @param {string[] | number[]} props.options - The array of options to be shown in the dropdown menu.
- * @param {string} props.label - The description or label for the dropdown menu.
+ * @param {boolean} props.open - Controls the visibility of the dialog.
+ * @param {Function} props.onClose - Callback function to handle the closing of the dialog.
  * @returns {JSX.Element} - The rendered component.
  */
 
 type DialogProps = {
-  [key: string]: any;
+  open: boolean;
+  onClose: (value: boolean) => void;
 };
 
-// Props destructured in here
 const ModalView = (props: DialogProps) => {
-  const [open, setOpen] = useState<boolean>(false);
-
   return (
     <>
       <Dialog
         fullWidth={true}
         maxWidth={"lg"}
         open={props.open}
-        onClose={() => setOpen(false)}
+        onClose={() => props.onClose(false)}
       >
         <DialogTitle>Submit the text?</DialogTitle>
         <DialogContent dividers>
           <DialogContentText>Are u sure</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button>Cancel</Button>
+          <Button onClick={() => props.onClose(false)}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </>

@@ -18,7 +18,7 @@ const IndexRoutes: React.FC = () => {
       <Route path="/dropdowns" element={<DropdownMenu />} />
       <Route path="/buttons" element={<Buttons />} />
       <Route path="/cards" element={<Cards />} />
-      <Route path="/modal-view" element={<Dialog />} />
+      <Route path="/dialog" element={<Dialog />} />
     </Routes>
   );
 };
