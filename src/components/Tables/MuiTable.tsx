@@ -21,6 +21,7 @@
  *     - 'text': Renders a button with the specified text.
  *     - 'content': Renders a button with the raw content.
  *     - 'mixed': Renders a button with a combination of content and text.
+ *   - buttonVarient?: 'text' | 'outlined' | 'contained' - (Optional) The variant of the button when type is 'button'.
  *   - text?: string - (Optional) The text to be displayed in the button when buttonKind is 'text' or 'mixed'.
  * @param {Array} props.tableData - An array of objects representing the data to be displayed in the table.
  * @param {boolean} props.stickyHeader - Determines whether the table header should stick to the top when scrolling.
@@ -46,12 +47,14 @@ type ColumnName = {
   align?: "right" | "left" | "center";
 };
 
-// Defines the expected structure of 'columnTypeMappingArray'.
+// Defines the expected structure of 'columnTypeMapping Object'.
 type ColumnAttributeMapping = {
   [key: string]:
     | {
         type?: "button" | undefined;
         buttonKind?: "text" | "content" | "mixed";
+        buttonVarient?: "text" | "outlined" | "contained";
+        text?: string;
       }
     | undefined;
 };
@@ -90,6 +93,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
   type ContentOptions = {
     type?: "button";
     buttonKind?: "text" | "content" | "mixed";
+    buttonVarient?: "text" | "outlined" | "contained";
     text?: string;
   };
 
@@ -109,7 +113,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
     }
 
     // Destructure button options
-    const { buttonKind, text } = contentOptions;
+    const { buttonKind, buttonVarient = "contained", text } = contentOptions;
 
     // Ensure buttonKind is provided
     if (!buttonKind) {
@@ -123,7 +127,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
           throw new Error("Text is required when buttonKind is 'text'.");
         }
         // Render button with text
-        return <Button>{text}</Button>;
+        return <Button variant={buttonVarient}>{text}</Button>;
 
       case "mixed":
         if (!text) {
@@ -131,14 +135,14 @@ export default function DefaultTable(tableProps: TableDataProps) {
         }
         // Render button with content and text
         return (
-          <Button>
+          <Button variant={buttonVarient}>
             {content} {text}
           </Button>
         );
 
       case "content":
         // Render button with content
-        return <Button>{content}</Button>;
+        return <Button variant={buttonVarient}>{content}</Button>;
 
       default:
         // Handle unsupported buttonKind
@@ -183,7 +187,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: StringMap) => {
                   return (
-                    <TableRow hover>
+                    <TableRow>
                       {Object.keys(tableProps.columnAttributeMapping).map(
                         (attributeName, index: number) => (
                           <TableCell key={index}>

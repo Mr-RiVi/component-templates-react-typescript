@@ -9,7 +9,7 @@ import {
 const CardCompBasic = () => {
   return (
     <>
-      <Card sx={{ minWidth: 275 }}>
+      <Card>
         <CardContent>
           <Typography>
             This impressive paella is a perfect party dish and a fun meal to
