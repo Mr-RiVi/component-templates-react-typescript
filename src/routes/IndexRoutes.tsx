@@ -1,13 +1,14 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import Home from "../Pages/Home";
-import SideNavBar from "../Pages/SideNavBar";
-import Table from "../Pages/Table";
-import DropdownMenu from "../Pages/DropdownMenu";
-import Buttons from "../Pages/Buttons";
-import Cards from "../Pages/Cards";
-import Dialog from "../Pages/Dialog";
+import Home from "../pages/Home";
+import SideNavBar from "../pages/SideNavBar";
+import Table from "../pages/Table";
+import DropdownMenu from "../pages/DropdownMenu";
+import Buttons from "../pages/Buttons";
+import Cards from "../pages/Cards";
+import Dialog from "../pages/Dialog";
+import { BaseLayout } from "../layouts/BaseLayout";
 
 const IndexRoutes: React.FC = () => {
   return (
@@ -15,10 +16,15 @@ const IndexRoutes: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/side-nav-bars" element={<SideNavBar />} />
       <Route path="/tables" element={<Table />} />
-      <Route path="/dropdowns" element={<DropdownMenu />} />
+      <Route path="/cards" element={<Cards />} />
       <Route path="/buttons" element={<Buttons />} />
       <Route path="/cards" element={<Cards />} />
       <Route path="/dialog" element={<Dialog />} />
+      <Route path="/layout" element={<BaseLayout />}>
+        <Route index element={<Navigate to="/layout" />} />
+        <Route path="cards" element={<Cards />} />
+        <Route path="tables" element={<Table />} />
+      </Route>
     </Routes>
   );
 };

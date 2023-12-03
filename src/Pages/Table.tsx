@@ -24,7 +24,31 @@
 
 import MuiTable from "../components/Tables/MuiTable";
 
-import { columns, columnAttributeMapping, tableData } from "../utils/tableData";
+import { columns, tableData } from "../utils/tableData";
+
+type ColumnAttributeMapping = {
+  [key: string]:
+    | {
+        type?: "button" | undefined;
+        buttonKind?: "text" | "content" | "mixed";
+        buttonVarient?: "text" | "outlined" | "contained";
+        text?: string;
+      }
+    | undefined;
+};
+
+export const columnAttributeMapping: ColumnAttributeMapping = {
+  name: {},
+  code: {},
+  population: {},
+  size: {
+    type: "button",
+    buttonKind: "mixed",
+    buttonVarient: "outlined",
+    text: "Kg",
+  },
+  density: { type: "button", buttonKind: "text", text: "Edit" },
+};
 
 const Table = () => {
   return (
