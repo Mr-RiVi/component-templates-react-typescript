@@ -73,6 +73,7 @@ type TableDataProps = {
   columnAttributeMapping: ColumnAttributeMapping;
   tableData: StringMap | undefined;
   stickyHeader: boolean;
+  handleButtonClick: (value: any) => void;
 };
 
 export default function DefaultTable(tableProps: TableDataProps) {
@@ -99,11 +100,15 @@ export default function DefaultTable(tableProps: TableDataProps) {
 
   /**
    * Renders the content of a table cell based on its type and options.
-   * @param content - The content of the cell.
-   * @param contentOptions - Additional options for rendering content (e.g., type-specific options for buttons).
-   * @returns The rendered content based on its type and options.
+   * @param {StringMap} rowData - The data object representing the entire row.
+   * @param {any} content - The content of the cell.
+   * @param {ContentOptions | undefined} contentOptions - Additional options for rendering content
+   *   (e.g., type-specific options for buttons).
+   *   If undefined, the default rendering for the content type is applied.
+   * @returns {React.ReactElement | any} - The rendered content based on its type and options.
    */
   const renderCellContent = (
+    rowData: StringMap,
     content: any,
     contentOptions: ContentOptions | undefined
   ) => {
@@ -127,7 +132,14 @@ export default function DefaultTable(tableProps: TableDataProps) {
           throw new Error("Text is required when buttonKind is 'text'.");
         }
         // Render button with text
-        return <Button variant={buttonVarient}>{text}</Button>;
+        return (
+          <Button
+            variant={buttonVarient}
+            onClick={() => tableProps.handleButtonClick(rowData)}
+          >
+            {text}
+          </Button>
+        );
 
       case "mixed":
         if (!text) {
@@ -135,14 +147,24 @@ export default function DefaultTable(tableProps: TableDataProps) {
         }
         // Render button with content and text
         return (
-          <Button variant={buttonVarient}>
+          <Button
+            variant={buttonVarient}
+            onClick={() => tableProps.handleButtonClick(rowData)}
+          >
             {content} {text}
           </Button>
         );
 
       case "content":
         // Render button with content
-        return <Button variant={buttonVarient}>{content}</Button>;
+        return (
+          <Button
+            variant={buttonVarient}
+            onClick={() => tableProps.handleButtonClick(rowData)}
+          >
+            {content}
+          </Button>
+        );
 
       default:
         // Handle unsupported buttonKind
@@ -192,6 +214,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
                         (attributeName, index: number) => (
                           <TableCell key={index}>
                             {renderCellContent(
+                              row,
                               row[attributeName],
                               tableProps.columnAttributeMapping[attributeName]
                             )}

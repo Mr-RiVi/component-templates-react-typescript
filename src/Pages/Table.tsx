@@ -51,6 +51,10 @@ export const columnAttributeMapping: ColumnAttributeMapping = {
 };
 
 const Table = () => {
+  const handleButtondata = (rowData: any) => {
+    console.log(rowData);
+  };
+
   return (
     <>
       <MuiTable
@@ -58,6 +62,7 @@ const Table = () => {
         columnAttributeMapping={columnAttributeMapping}
         tableData={tableData}
         stickyHeader={true}
+        handleButtonClick={handleButtondata}
       />
     </>
   );

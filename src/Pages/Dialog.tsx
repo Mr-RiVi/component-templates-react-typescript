@@ -14,7 +14,11 @@ const Dialog = () => {
       >
         View
       </Button>
-      <ModalView open={isDialogOpen} onClose={setDialogOpen} />
+      <ModalView
+        open={isDialogOpen}
+        onClose={setDialogOpen}
+        content={{ hello: 12 }}
+      />
     </>
   );
 };

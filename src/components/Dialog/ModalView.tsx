@@ -7,6 +7,8 @@ import {
   Button,
 } from "@mui/material";
 
+import { DataStruct } from "../../utils/types";
+
 /**
  * A reusable functional component that represents a Material-UI dialog/modal.
  * @param {Object} props - The props passed to the component.
@@ -18,6 +20,7 @@ import {
 type DialogProps = {
   open: boolean;
   onClose: (value: boolean) => void;
+  content: DataStruct;
 };
 
 const ModalView = (props: DialogProps) => {

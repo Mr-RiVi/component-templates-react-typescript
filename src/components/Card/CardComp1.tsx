@@ -28,7 +28,7 @@ const CardComp1 = () => {
           }
           title="Shrimp and Chorizo Paella"
           subheader="September 14, 2016"
-        ></CardHeader>
+        />
 
         <CardMedia component="img" height="194" image={img} alt="Paella dish" />
 
