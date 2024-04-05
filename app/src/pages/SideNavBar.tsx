@@ -2,22 +2,24 @@ import { FunctionComponent, PropsWithChildren, ReactElement } from "react";
 
 import MuiSideNav from "../components/SideNavBars/MuiSideNav";
 
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import ViewQuiltOutlinedIcon from '@mui/icons-material/ViewQuiltOutlined';
 import DraftsIcon from "@mui/icons-material/Drafts";
 import SendIcon from "@mui/icons-material/Send";
 import StarIcon from "@mui/icons-material/Star";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-interface SideNavBarPropsInterface {}
+import MuiExpandableSidebar from "../components/SideNavBars/MuiExpandableSidebar";
+
+interface SideNavBarPropsInterface { }
 
 const SideNavBar: FunctionComponent<
   PropsWithChildren<SideNavBarPropsInterface>
 > = (): ReactElement => {
   const navItems = [
     {
-      icon: <InboxIcon />,
-      label: "Inbox",
-      link: "/inbox",
+      icon: <ViewQuiltOutlinedIcon />,
+      label: "Layouts",
+      link: "/home/buttons",
     },
     {
       icon: <DraftsIcon />,
@@ -40,7 +42,7 @@ const SideNavBar: FunctionComponent<
       link: "/trash",
     },
     {
-      icon: <InboxIcon />, // You can reuse icons for variety
+      icon: <ViewQuiltOutlinedIcon />, // You can reuse icons for variety
       label: "Custom Section",
       subItems: [
         {
@@ -59,7 +61,9 @@ const SideNavBar: FunctionComponent<
 
   return (
     <>
-      <MuiSideNav items={navItems} />
+      {/* <MuiSideNav items={navItems} /> */}
+      <MuiExpandableSidebar items={navItems} />
+
     </>
   );
 };

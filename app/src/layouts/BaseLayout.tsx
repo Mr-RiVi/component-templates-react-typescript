@@ -3,22 +3,31 @@ import { FunctionComponent, PropsWithChildren, ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 
 import SideNavBar from "../pages/SideNavBar";
+import { Header } from "../components/Header/MuiHeader";
+import { Toolbar } from "@mui/material";
 
-interface BaseLayoutProps {}
+import { drawerWidth } from "../components/SideNavBars/MuiExpandableSidebar";
+
+interface BaseLayoutProps { }
 
 export const BaseLayout: FunctionComponent<
   PropsWithChildren<BaseLayoutProps>
 > = (): ReactElement => {
   return (
-    <section className="wrapper">
-      <section className="header"></section>
-      <section className="side-navigation">
-        <SideNavBar />
-      </section>
-      <section className="content">
-        <Outlet />
-      </section>
-      <section className="footer"></section>
-    </section>
+    <div className="wrapper">
+      <div className="header">
+        <Header />
+      </div>
+      <Toolbar />
+      <div className="content">
+        <div className="side-navigation">
+          <SideNavBar />
+        </div>
+        <main style={{ marginLeft: drawerWidth + 8 }} className="main-content">
+          <Outlet />
+        </main>
+      </div>
+      <div className="footer"></div>
+    </div>
   );
 };

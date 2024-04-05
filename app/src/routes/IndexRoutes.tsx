@@ -10,11 +10,18 @@ import Cards from "../pages/Cards";
 import Dialog from "../pages/Dialog";
 import { BaseLayout } from "../layouts/BaseLayout";
 
+import MiniDrawer from "../components/SideNavBars/tBar";
+import { NotFoundPage } from "../pages/NotFound";
+import { Loading } from "../pages/Loading";
+
 const IndexRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/side-nav-bars" element={<SideNavBar />} />
+      <Route path="/side" element={<MiniDrawer />} />
+      <Route path="/sidenavex" element={<SideNavBar />} />
       <Route path="/tables" element={<Table />} />
       <Route path="/cards" element={<Cards />} />
       <Route path="/buttons" element={<Buttons />} />
@@ -25,6 +32,8 @@ const IndexRoutes: React.FC = () => {
         <Route path="cards" element={<Cards />} />
         <Route path="tables" element={<Table />} />
       </Route>
+      <Route path="/loading" element={<Loading />} />
+      <Route path="/NotFoundPage" element={<NotFoundPage />} />
     </Routes>
   );
 };
