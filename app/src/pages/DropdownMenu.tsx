@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import SelectMaterialUI from "../components/DropdownMenu/MuiSelect";
 import { products } from "../utils/dropdownOptions";

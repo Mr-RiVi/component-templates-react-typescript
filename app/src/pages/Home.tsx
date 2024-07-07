@@ -1,7 +1,7 @@
 import { useAuthContext } from "@asgardeo/auth-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loading } from "./Loading";
+// import { Loading } from "./Loading";
 
 const Home = () => {
   const { signIn, state } = useAuthContext();

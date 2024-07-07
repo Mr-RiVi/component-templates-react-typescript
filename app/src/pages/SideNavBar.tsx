@@ -1,6 +1,6 @@
 import { FunctionComponent, PropsWithChildren, ReactElement } from "react";
 
-import MuiSideNav from "../components/SideNavBars/MuiSideNav";
+// import MuiSideNav from "../components/SideNavBars/MuiSideNav";
 
 import ViewQuiltOutlinedIcon from '@mui/icons-material/ViewQuiltOutlined';
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';

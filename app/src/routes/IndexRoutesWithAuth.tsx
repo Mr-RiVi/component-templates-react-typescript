@@ -3,10 +3,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import { SecureApp } from "@asgardeo/auth-react";
 
-import Home from "../pages/Home";
+// import Home from "../pages/Home";
 import SideNavBar from "../pages/SideNavBar";
 import Table from "../pages/Table";
-import DropdownMenu from "../pages/DropdownMenu";
+// import DropdownMenu from "../pages/DropdownMenu";
 import Buttons from "../pages/Buttons";
 import Cards from "../pages/Cards";
 import Dialog from "../pages/Dialog";

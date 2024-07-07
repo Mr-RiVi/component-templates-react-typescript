@@ -50,13 +50,13 @@ type ColumnName = {
 // Defines the expected structure of 'columnTypeMapping Object'.
 type ColumnAttributeMapping = {
   [key: string]:
-    | {
-        type?: "button" | undefined;
-        buttonKind?: "text" | "content" | "mixed";
-        buttonVarient?: "text" | "outlined" | "contained";
-        text?: string;
-      }
-    | undefined;
+  | {
+    type?: "button" | undefined;
+    buttonKind?: "text" | "content" | "mixed";
+    buttonVarient?: "text" | "outlined" | "contained";
+    text?: string;
+  }
+  | undefined;
 };
 
 /**
@@ -81,6 +81,8 @@ export default function DefaultTable(tableProps: TableDataProps) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (event: unknown, newPage: number) => {
+    console.log(event);
+
     setPage(newPage);
   };
 
@@ -194,7 +196,7 @@ export default function DefaultTable(tableProps: TableDataProps) {
           </TableHead>
           <TableBody>
             {(tableProps.tableData && tableProps.tableData.length === 0) ||
-            tableProps.tableData === undefined ? (
+              tableProps.tableData === undefined ? (
               <TableRow>
                 <TableCell
                   colSpan={tableProps.columnNamesArray.length}
