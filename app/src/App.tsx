@@ -1,15 +1,19 @@
-import React from "react";
-import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import IndexRoutes from "./routes/IndexRoutesWithAuth";
+import { Box, ThemeProvider } from "@mui/material";
+import { AppTheme } from "./assets/styles/Themes/CustomAppTheme";
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <IndexRoutes />
-      </BrowserRouter>
-    </div>
+    <ThemeProvider theme={AppTheme}>
+      <Box
+        className="App"
+      >
+        <BrowserRouter>
+          <IndexRoutes />
+        </BrowserRouter>
+      </Box>
+    </ThemeProvider>
   );
 }
 

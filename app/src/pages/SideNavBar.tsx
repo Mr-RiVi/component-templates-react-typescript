@@ -3,10 +3,10 @@ import { FunctionComponent, PropsWithChildren, ReactElement } from "react";
 import MuiSideNav from "../components/SideNavBars/MuiSideNav";
 
 import ViewQuiltOutlinedIcon from '@mui/icons-material/ViewQuiltOutlined';
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
-import StarIcon from "@mui/icons-material/Star";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 import MuiExpandableSidebar from "../components/SideNavBars/MuiExpandableSidebar";
 
@@ -22,36 +22,36 @@ const SideNavBar: FunctionComponent<
       link: "/home/buttons",
     },
     {
-      icon: <DraftsIcon />,
+      icon: <DraftsOutlinedIcon />,
       label: "Drafts",
       link: "/drafts",
     },
     {
-      icon: <SendIcon />,
+      icon: <SendOutlinedIcon />,
       label: "Sent Items",
-      link: "/sent",
+      link: "/home/sent",
     },
     {
-      icon: <StarIcon />,
+      icon: <StarBorderOutlinedIcon />,
       label: "Starred",
       link: "/starred",
     },
     {
-      icon: <DeleteIcon />,
+      icon: <DeleteOutlinedIcon />,
       label: "Trash",
       link: "/trash",
     },
     {
-      icon: <ViewQuiltOutlinedIcon />, // You can reuse icons for variety
+      icon: <ViewQuiltOutlinedIcon />,
       label: "Custom Section",
       subItems: [
         {
-          icon: <StarIcon />,
+          icon: <StarBorderOutlinedIcon />,
           label: "Important",
           link: "/important",
         },
         {
-          icon: <DeleteIcon />,
+          icon: <DeleteOutlinedIcon />,
           label: "Deleted",
           link: "/deleted",
         },

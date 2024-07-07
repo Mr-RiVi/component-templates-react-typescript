@@ -34,6 +34,7 @@ const IndexRoutesWithAuth: React.FC = () => {
                     <Route path="cards" element={<Cards />} />
                     <Route path="tables" element={<Table />} />
                     <Route path="buttons" element={<Buttons />} />
+                    <Route path="sent" element={<Loading />} />
                 </Route>
                 <Route path="/loading" element={<Loading />} />
                 <Route path="/NotFoundPage" element={<NotFoundPage />} />

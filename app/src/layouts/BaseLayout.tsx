@@ -4,9 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import SideNavBar from "../pages/SideNavBar";
 import { Header } from "../components/Header/MuiHeader";
-import { Toolbar } from "@mui/material";
-
-import { drawerWidth } from "../components/SideNavBars/MuiExpandableSidebar";
+import { Box, Toolbar } from "@mui/material";
 
 interface BaseLayoutProps { }
 
@@ -14,20 +12,22 @@ export const BaseLayout: FunctionComponent<
   PropsWithChildren<BaseLayoutProps>
 > = (): ReactElement => {
   return (
-    <div className="wrapper">
-      <div className="header">
+    <Box>
+      <Box className="header">
         <Header />
-      </div>
+      </Box>
       <Toolbar />
-      <div className="content">
-        <div className="side-navigation">
+      <Box sx={{ display: 'flex' }}>
+        <Box>
           <SideNavBar />
-        </div>
-        <main style={{ marginLeft: drawerWidth + 8 }} className="main-content">
+        </Box>
+        <Box
+          sx={{ paddingX: 5 }}
+        >
           <Outlet />
-        </main>
-      </div>
+        </Box>
+      </Box>
       <div className="footer"></div>
-    </div>
+    </Box>
   );
 };

@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import img from "../../logo.svg";
+import img from "/src/assets/images/myai2.png";
 import FavoriteIcon from "@mui/icons-material/FavoriteOutlined";
 
 const CardComp1 = () => {

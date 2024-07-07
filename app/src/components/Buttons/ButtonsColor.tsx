@@ -19,7 +19,7 @@ const ButtonsColorComponent = () => {
         Contained
       </Button>
       <Button variant="contained" color="success">
-        Contained
+        Contained2
       </Button>
     </>
   );

@@ -10,13 +10,14 @@ import "../assets/styles/loading.css";
  */
 export const Loading: FunctionComponent = (): ReactElement => {
 
-    return (<>
-        <section className="loading-body">
-            <div className="loader">
-                <div className="inner-border"></div>
-            </div>
-        </section>
-    </>
+    return (
+        <>
+            <section className="loading-body">
+                <div className="loader">
+                    <div className="inner-border"></div>
+                </div>
+            </section>
+        </>
 
     );
 };

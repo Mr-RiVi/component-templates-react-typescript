@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mui/material";
 
-import { DataStruct } from "../../utils/types";
+import { DataStruct } from "../../types/types";
 
 /**
  * A reusable functional component that represents a Material-UI dialog/modal.

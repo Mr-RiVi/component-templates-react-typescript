@@ -4,22 +4,48 @@ import { useAuthContext } from "@asgardeo/auth-react";
 
 import {
     AppBar,
+    Avatar,
+    Box,
     Divider,
     IconButton,
+    ListItem,
+    ListItemAvatar,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
     Menu,
-    MenuItem,
+    MenuList,
     Theme,
+    ThemeProvider,
     Toolbar,
     Typography,
     useTheme
 } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+
+import AttractionsOutlinedIcon from '@mui/icons-material/AttractionsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+
+import { AppBarTheme } from "../../assets/styles/Themes/CustomAppBarTheme";
+import useProfileMenuTheme from "../../assets/styles/Themes/customProfileMenuTheme";
 
 const themedStyles = (theme: Theme) => {
     return {
-        appBar: {
-            background: "#ffffff",
-            zIndex: theme.zIndex.drawer + 1
+        avatarContainer: {
+            width: 32,
+            height: 32,
+            position: 'relative',
+            display: 'inline-block',
+            border: `2px solid ${theme.palette.primary.main}`,
+            borderRadius: '50%',
+            overflow: 'hidden',
+            transition: 'border-color 0.2s ease-in-out'
+        },
+        menuAvatar: {
+            width: 40,
+            height: 40,
+            border: '1px solid white',
+            fontSize: 13
         }
     }
 }
@@ -34,11 +60,17 @@ const themedStyles = (theme: Theme) => {
 export const Header: FunctionComponent = (): ReactElement => {
     const { signOut, state } = useAuthContext();
 
+    const pic_url = "";
+    const displayName = state.displayName;
+    const username = state.username;
+
     const theme = useTheme();
+    const profileMenuTheme = useProfileMenuTheme();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+        console.log(state);
         setAnchorEl(event.currentTarget);
     };
 
@@ -49,48 +81,113 @@ export const Header: FunctionComponent = (): ReactElement => {
     const handleLogout = () => {
         signOut();
     }
-    // sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: "#ffffff" }}
+
     return (
-        <AppBar sx={{ ...themedStyles(theme).appBar }} elevation={0} position="fixed">
-            <Toolbar>
-                <Typography variant="h6" component="div" sx={{ color: "black", flexGrow: 1 }}>
-                    Logo
-                </Typography>
-                {true && (
-                    <div>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                        >
-                            <AccountCircle sx={{ color: "black" }} />
-                        </IconButton>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        </Menu>
-                    </div>
-                )}
-            </Toolbar>
-            <Divider />
-        </AppBar>
+        <ThemeProvider theme={AppBarTheme}>
+            <AppBar
+                elevation={0}
+                position="fixed"
+            >
+                <Toolbar>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            color: "black",
+                            flexGrow: 1
+                        }}
+                    >
+                        Logo
+                    </Typography>
+                    {true && (
+                        <ThemeProvider theme={profileMenuTheme}>
+                            <Box>
+                                <Box>
+                                    <IconButton
+                                        size="large"
+                                        aria-label="account of current user"
+                                        aria-controls="menu-appbar"
+                                        aria-haspopup="true"
+                                        onClick={handleMenu}
+                                        color="inherit"
+                                    >
+                                        <Box
+                                            sx={{
+                                                ...themedStyles(theme).avatarContainer
+                                            }}>
+                                            <Avatar
+                                                alt={displayName}
+                                                src={pic_url}
+                                            />
+                                        </Box>
+                                    </IconButton>
+                                </Box>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                    sx={{ mt: '45px' }}
+                                >
+                                    <MenuList
+                                        sx={{ padding: 0 }}
+                                    >
+                                        <ListItem>
+                                            <ListItemAvatar>
+                                                <Avatar
+                                                    alt={displayName}
+                                                    src={pic_url}
+                                                    sx={{ ...themedStyles(theme).menuAvatar }}
+                                                />
+                                            </ListItemAvatar>
+                                            <ListItemText primary={displayName} secondary={username} />
+                                        </ListItem>
+                                        <Box sx={{ paddingTop: '8px' }}>
+                                            <Divider />
+                                        </Box>
+                                        <ListItemButton
+                                            onClick={handleClose}
+                                        >
+                                            <ListItemIcon
+                                            >
+                                                <SettingsOutlinedIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Feature Preview" />
+                                        </ListItemButton>
+                                        <ListItemButton
+                                            onClick={handleClose}
+                                        >
+                                            <ListItemIcon
+                                            >
+                                                <AttractionsOutlinedIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Profile" />
+                                        </ListItemButton>
+                                        <ListItemButton
+                                            onClick={handleLogout}
+                                        >
+                                            <ListItemIcon
+                                            >
+                                                <LogoutOutlinedIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary="Logout" />
+                                        </ListItemButton>
+                                    </MenuList>
+                                </Menu>
+                            </Box>
+                        </ThemeProvider>
+                    )}
+                </Toolbar>
+                <Divider />
+            </AppBar>
+        </ThemeProvider>
     );
 };

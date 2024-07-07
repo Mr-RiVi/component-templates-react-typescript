@@ -1,10 +1,11 @@
 {
     "clientID": "bRmLpWWgUYDk6qpsOHmJFS19XGka",
     "baseUrl": "https://api.asgardeo.io/t/orgr",
-    "signInRedirectURL": "http://localhost:3500/home/",
-    "signOutRedirectURL": "http://localhost:3500/home/",
+    "signInRedirectURL": "http://localhost:5174/home/",
+    "signOutRedirectURL": "http://localhost:5174/home/",
     "disableTrySignInSilently": false,
     "scope": [
+        "openid",
         "profile"
     ]
 }
